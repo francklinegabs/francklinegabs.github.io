@@ -81,6 +81,8 @@ section{padding:56px 0;border-top:1px solid var(--rule)}
 .case dd{color:var(--soft)}
 .case dd b{color:var(--ink);font-weight:500}
 .case .more{margin-top:14px;font-size:14px}
+.fig{margin:18px 0 0;border:1px solid var(--rule);border-radius:3px;background:#fff;padding:6px}
+.fig img{width:100%;height:auto;display:block}
 @media(max-width:520px){.case dl{grid-template-columns:1fr;gap:2px}.case dd{margin-bottom:10px}}
 
 /* metric strip for the alpha case */
@@ -127,6 +129,7 @@ footer{padding:32px 0 48px;border-top:1px solid var(--rule);font-family:var(--mo
 <header class="top">
   <a class="who" href="#">Franckline Were</a>
   <nav>
+    <a href="#projects">Projects</a>
     <a href="#work">Work</a>
     <a href="#toolkit">Toolkit</a>
     <a href="#experience">Experience</a>
@@ -146,7 +149,7 @@ footer{padding:32px 0 48px;border-top:1px solid var(--rule);font-family:var(--mo
     <div class="links">
       <a class="main" href="mailto:francklinewere@gmail.com">Email me</a>
       <a class="plain" href="https://github.com/francklinegabs" target="_blank" rel="noopener">GitHub</a>
-      <a class="plain" href="#work">See the work</a>
+      <a class="plain" href="#projects">See the projects</a>
     </div>
   </div>
   <figure class="me">
@@ -161,11 +164,86 @@ footer{padding:32px 0 48px;border-top:1px solid var(--rule);font-family:var(--mo
   <tr><th>Good fit for</th><td>Small teams who need someone to clean up a dataset, answer a specific question, or build a report they can rerun</td></tr>
 </table>
 
-<section id="work">
+<section id="projects">
   <div class="sh">
     <span class="n">01</span>
-    <h2>Selected work</h2>
-    <p>Each one written up the way I'd hand it to a client: what was asked, what data there was, and what came out.</p>
+    <h2>Data projects</h2>
+    <p>Five end-to-end analyses on real public data. Each repository has the code, the data pipeline, the charts and a full write-up you can re-run.</p>
+  </div>
+  <div class="body">
+
+    <article class="case">
+      <h3>Online retail customer analytics</h3>
+      <div class="meta">Python · pandas · scikit-learn · 541,909 transactions · 5 tests</div>
+      <dl>
+        <dt>Question</dt><dd>Who are a UK gift wholesaler's most valuable customers, do new customers come back, and what gets bought together?</dd>
+        <dt>Data</dt><dd>A year of real transactions from the UCI Machine Learning Repository, Dec 2010 – Dec 2011.</dd>
+        <dt>Method</dt><dd>A tested cleaning pipeline, RFM segmentation, monthly cohort retention, k-means clustering chosen by silhouette score, a Lorenz curve, and market-basket lift.</dd>
+        <dt>Result</dt><dd>The <b>top 20% of customers bring in 74% of revenue</b>. Only 21% of new customers buy again the following month. 347 lapsed "can't lose them" accounts hold £630k of past revenue, making them the first win-back target. Cleaning also caught <b>£424k of orders that were placed and then cancelled</b>, including a single 80,995-unit order, all of which would otherwise have counted as sales.</dd>
+      </dl>
+      <figure class="fig"><img loading="lazy" src="https://raw.githubusercontent.com/francklinegabs/online-retail-customer-analytics/main/figures/cohort_retention.png" alt="Monthly cohort retention heatmap"></figure>
+      <div class="more"><a href="https://github.com/francklinegabs/online-retail-customer-analytics" target="_blank" rel="noopener">Code and full write-up →</a></div>
+    </article>
+
+    <article class="case">
+      <h3>Equity factor research</h3>
+      <div class="meta">Python · backtesting · 97 US stocks · 2015–2025 · 6 tests</div>
+      <dl>
+        <dt>Question</dt><dd>Do momentum, short-term reversal and low-volatility still earn a premium in US large caps once costs are counted?</dd>
+        <dt>Data</dt><dd>Eleven years of daily adjusted prices with GICS sector labels.</dd>
+        <dt>Method</dt><dd>Monthly quintile long-short portfolios, raw and sector-neutral, measured by information coefficient, turnover, 10 bps trading costs and a <b>strict in-sample / out-of-sample split</b>. Tests check for look-ahead bias.</dd>
+        <dt>Result</dt><dd>No, at least not here. Momentum looked fine in-sample (Sharpe 0.24) and lost 8% a year out-of-sample. Reversal had a real signal (gross Sharpe 0.45) that trading costs wiped out. The write-up explains how survivorship bias in a "today's large caps" universe tilts the results.</dd>
+      </dl>
+      <figure class="fig"><img loading="lazy" src="https://raw.githubusercontent.com/francklinegabs/equity-factor-research/main/figures/cumulative_long_short.png" alt="Cumulative long-short factor returns"></figure>
+      <div class="more"><a href="https://github.com/francklinegabs/equity-factor-research" target="_blank" rel="noopener">Code and full write-up →</a></div>
+    </article>
+
+    <article class="case">
+      <h3>SQL business analytics</h3>
+      <div class="meta">SQL · SQLite · 15 queries · CTEs · window functions</div>
+      <dl>
+        <dt>Question</dt><dd>Fifteen questions a music store's management would ask: growth, markets, genres, customer value, cross-sell and data quality.</dd>
+        <dt>Data</dt><dd>The Chinook database: customers, invoices, tracks, artists and staff, 2021–2025.</dd>
+        <dt>Method</dt><dd>Pure SQL, one file per question, using <b>LAG, RANK, NTILE, ROW_NUMBER</b>, rolling windows, recursive CTEs, anti-joins and reconciliation checks.</dd>
+        <dt>Result</dt><dd>Revenue is flat at about $450–480 a year (it is a small sample database). 43% of the catalogue has never sold. Revenue per customer is almost the same in every country. The data itself is too regular to be real (every customer has exactly 7 orders), and the write-up says so rather than over-reading it.</dd>
+      </dl>
+      <div class="more"><a href="https://github.com/francklinegabs/sql-business-analytics" target="_blank" rel="noopener">Queries and results →</a></div>
+    </article>
+
+    <article class="case">
+      <h3>Kenya's economy vs East African peers</h3>
+      <div class="meta">Python · World Bank API · 12 indicators · 2000–2024</div>
+      <dl>
+        <dt>Question</dt><dd>How do Kenya's inflation, growth, shilling and external position compare with Uganda, Tanzania, Rwanda and Ethiopia?</dd>
+        <dt>Data</dt><dd>About 1,300 country-year observations pulled straight from the World Bank API.</dd>
+        <dt>Method</dt><dd>Peer profiles, real income indexed to 2000, regressions of exchange-rate pass-through, and an <b>automatic check for breaks in the data series</b>.</dd>
+        <dt>Result</dt><dd>Kenya is the richest economy in the group but has the slowest growth in income per person: 1.9% a year, against 4.9–5.4% for Rwanda and Ethiopia. Inflation has stayed in the central bank's target band in 9 of the last 12 years. Diaspora remittances now cover <b>66% of the trade deficit</b>, up from 13% in 2011.</dd>
+      </dl>
+      <figure class="fig"><img loading="lazy" src="https://raw.githubusercontent.com/francklinegabs/kenya-macro-analysis/main/figures/gdp_per_capita_index.png" alt="Real GDP per capita index, Kenya and peers"></figure>
+      <div class="more"><a href="https://github.com/francklinegabs/kenya-macro-analysis" target="_blank" rel="noopener">Code and full write-up →</a></div>
+    </article>
+
+    <article class="case">
+      <h3>Kenya climate trends, 1981–2025</h3>
+      <div class="meta">Python · ERA5 reanalysis · 82,180 city-days · Mann-Kendall</div>
+      <dl>
+        <dt>Question</dt><dd>How fast are Nairobi, Mombasa, Kisumu, Eldoret and Garissa warming, and how reliable are the two rainy seasons?</dd>
+        <dt>Data</dt><dd>45 years of daily temperature and rainfall from the Open-Meteo archive.</dd>
+        <dt>Method</dt><dd>OLS and Mann-Kendall trend tests against a 1981–2010 baseline, seasonal rainfall anomalies, failed-season counts, and hot days above each city's own 90th percentile.</dd>
+        <dt>Result</dt><dd>All five cities are warming at <b>0.18–0.27 °C per decade</b> (p &lt; 0.001). Nairobi's hot days rose from about 30 to 77 a year. Rainfall swings widely and shows no clear trend in Nairobi. The write-up lists which rainfall results not to trust, and why.</dd>
+      </dl>
+      <figure class="fig"><img loading="lazy" src="https://raw.githubusercontent.com/francklinegabs/kenya-climate-trends/main/figures/temperature_trends.png" alt="Temperature anomaly trends for five Kenyan cities"></figure>
+      <div class="more"><a href="https://github.com/francklinegabs/kenya-climate-trends" target="_blank" rel="noopener">Code and full write-up →</a></div>
+    </article>
+
+  </div>
+</section>
+
+<section id="work">
+  <div class="sh">
+    <span class="n">02</span>
+    <h2>Work and other projects</h2>
+    <p>Paid work and builds, written up the same way: what was asked, what data there was, and what came out.</p>
   </div>
   <div class="body">
 
@@ -225,7 +303,7 @@ footer{padding:32px 0 48px;border-top:1px solid var(--rule);font-family:var(--mo
 
 <section id="toolkit">
   <div class="sh">
-    <span class="n">02</span>
+    <span class="n">03</span>
     <h2>Toolkit</h2>
     <p>Honest levels. Filled squares are how comfortable I am working alone with each one.</p>
   </div>
@@ -233,11 +311,11 @@ footer{padding:32px 0 48px;border-top:1px solid var(--rule);font-family:var(--mo
     <table class="tk">
       <thead><tr><th>Tool</th><th>Level</th><th>Where I've used it</th></tr></thead>
       <tbody>
-        <tr><td>Python</td><td><span class="lvl" aria-label="4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></td><td>pandas and NumPy for cleaning and analysis, Django apps, scripting</td></tr>
-        <tr><td>SQL</td><td><span class="lvl" aria-label="3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></td><td>Joins, aggregation and relational schema design</td></tr>
-        <tr><td>Statistics</td><td><span class="lvl" aria-label="4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></td><td>Backtesting, correlation, risk-adjusted metrics, overfitting checks</td></tr>
+        <tr><td>Python</td><td><span class="lvl" aria-label="4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></td><td>pandas, NumPy, SciPy and scikit-learn in all five data projects; Django apps</td></tr>
+        <tr><td>SQL</td><td><span class="lvl" aria-label="3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></td><td>CTEs, window functions and recursive queries (15-query SQL project); schema design</td></tr>
+        <tr><td>Statistics</td><td><span class="lvl" aria-label="4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></td><td>Backtesting, regression, Mann-Kendall trend tests, information coefficients, overfitting checks</td></tr>
         <tr><td>Excel / Sheets</td><td><span class="lvl" aria-label="4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></td><td>Pivot tables, lookups, quick reporting for non-technical readers</td></tr>
-        <tr><td>Data visualisation</td><td><span class="lvl" aria-label="3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></td><td>matplotlib, charts in HTML/JS reports</td></tr>
+        <tr><td>Data visualisation</td><td><span class="lvl" aria-label="3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></td><td>matplotlib: cohort heatmaps, Lorenz curves, anomaly charts</td></tr>
         <tr><td>Git &amp; GitHub</td><td><span class="lvl" aria-label="4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></td><td>Versioning analysis and app code</td></tr>
         <tr><td>Java, JavaScript</td><td><span class="lvl" aria-label="3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></td><td>Coursework and small web tools</td></tr>
       </tbody>
@@ -247,7 +325,7 @@ footer{padding:32px 0 48px;border-top:1px solid var(--rule);font-family:var(--mo
 
 <section id="experience">
   <div class="sh">
-    <span class="n">03</span>
+    <span class="n">04</span>
     <h2>Experience</h2>
   </div>
   <div class="body">
@@ -276,7 +354,7 @@ footer{padding:32px 0 48px;border-top:1px solid var(--rule);font-family:var(--mo
 
 <section>
   <div class="sh">
-    <span class="n">04</span>
+    <span class="n">05</span>
     <h2>Other things I've built</h2>
   </div>
   <div class="body">
@@ -291,7 +369,7 @@ footer{padding:32px 0 48px;border-top:1px solid var(--rule);font-family:var(--mo
 
 <section id="contact" class="contact">
   <div class="sh">
-    <span class="n">05</span>
+    <span class="n">06</span>
     <h2>Contact</h2>
   </div>
   <div class="body">
